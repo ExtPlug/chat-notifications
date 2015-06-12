@@ -1,0 +1,10 @@
+{ "name": "extplug-chat-notifications"
+, "version": "1.0.0"
+, "description": "ExtPlug plugin that shows some useful notification messages in chat."
+, "devDependencies":
+  { "gulp": "^3.8.11"
+  , "gulp-babel": "^5.1.0"
+  , "requirejs": "^2.1.17" }
+, "scripts":
+  { "build": "gulp build"
+  , "test": "jshint src" } }
