@@ -5,6 +5,7 @@ define(function (require, exports, module) {
 
   const ChatNotifications = Plugin.extend({
     name: 'Chat Notifications',
+    description: 'Shows notification messages in chat for useful events',
 
     settings: {
       inline: { type: 'boolean', label: 'Small Notifications', default: true },
