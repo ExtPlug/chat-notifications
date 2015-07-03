@@ -22,11 +22,13 @@ https://extplug.github.io/chat-notifications/build/chat-notifications.js;extplug
 
 **Note: This section is intended for room hosts only.**
 
-You can add custom [Room Styles](https://github.com/ExtPlug/room-styles) for
-notification messages. The different message CSS classes are:
+You can add custom [Room Styles](https://github.com/ExtPlug/room-styles)
+for notification messages. All notification messages have the
+`.cm.extplug-notification` CSS class. Different notification types also
+get their own CSS classes:
 
- * `.extplug-user-join`
- * `.extplug-user-leave`
+ * `.extplug-user-join`, plus `.extplug-friend-join` for friends
+ * `.extplug-user-leave`, plus `.extplug-friend-leave` for friends
  * `.extplug-grab`
  * `.extplug-woot`
  * `.extplug-meh`
@@ -38,7 +40,7 @@ Example to give meh notifications a painful red background:
 {
   "css": {
     "rule": {
-      ".extplug-meh": { "background": "#f00" }
+      ".cm.extplug-meh": { "background": "#f00" }
     }
   }
 }
