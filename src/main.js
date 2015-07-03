@@ -60,13 +60,14 @@ define(function (require, exports, module) {
 
     _class() {
       let inline = this.settings.get('inline');
-      return `custom extplug-notification ${inline ? 'inline ' : ''}`;
+      return `${inline ? 'inline ' : ''}`;
     },
 
     onJoin(e) {
       if (this.settings.get('friendJoin') && isFriend(e.id)) {
         Events.trigger('chat:receive', {
-          type: `${this._class()} extplug-user-join extplug-friend-join`,
+          type: 'extplug-notification',
+          classes: `${this._class()} extplug-user-join extplug-friend-join`,
           message: 'joined the room',
           uid: e.id,
           un: e.username,
@@ -75,7 +76,8 @@ define(function (require, exports, module) {
       }
       else if (this.settings.get('userJoin')) {
         Events.trigger('chat:receive', {
-          type: `${this._class()} extplug-user-join`,
+          type: 'extplug-notification',
+          classes: `${this._class()} extplug-user-join`,
           message: 'joined the room',
           uid: e.id,
           un: e.username,
@@ -87,7 +89,8 @@ define(function (require, exports, module) {
     onLeave(user) {
       if (this.settings.get('friendLeave') && isFriend(user.id)) {
         Events.trigger('chat:receive', {
-          type: `${this._class()} extplug-user-leave extplug-friend-leave`,
+          type: 'extplug-notification',
+          classes: `${this._class()} extplug-user-leave extplug-friend-leave`,
           message: 'left the room',
           uid: user.id,
           un: user.username,
@@ -96,7 +99,8 @@ define(function (require, exports, module) {
       }
       if (this.settings.get('userLeave')) {
         Events.trigger('chat:receive', {
-          type: `${this._class()} extplug-user-leave`,
+          type: 'extplug-notification',
+          classes: `${this._class()} extplug-user-leave`,
           message: 'left the room',
           uid: user.id,
           un: user.username,
@@ -108,7 +112,8 @@ define(function (require, exports, module) {
     onAdvance(e) {
       if (this.settings.get('advance')) {
         Events.trigger('chat:receive', {
-          type: 'custom extplug-advance',
+          type: 'extplug-notification',
+          classes: 'extplug-advance',
           message: `${e.media.author} – ${e.media.title}`,
           uid: e.dj.id,
           un: e.dj.username,
@@ -120,7 +125,8 @@ define(function (require, exports, module) {
     onGrab(e) {
       if (this.settings.get('grab')) {
         Events.trigger('chat:receive', {
-          type: `${this._class()} extplug-grab`,
+          type: 'extplug-notification',
+          classes: `${this._class()} extplug-grab`,
           message: 'grabbed this track',
           uid: e.user.id,
           un: e.user.username,
@@ -132,7 +138,8 @@ define(function (require, exports, module) {
     onVote(e) {
       if (this.settings.get('meh') && e.vote === -1) {
         Events.trigger('chat:receive', {
-          type: `${this._class()} extplug-meh`,
+          type: 'extplug-notification',
+          classes: `${this._class()} extplug-meh`,
           message: 'meh\'d this track',
           uid: e.user.id,
           un: e.user.username,
@@ -141,7 +148,8 @@ define(function (require, exports, module) {
       }
       if (this.settings.get('woot') && e.vote === 1) {
         Events.trigger('chat:receive', {
-          type: `${this._class()} extplug-woot`,
+          type: 'extplug-notification',
+          classes: `${this._class()} extplug-woot`,
           message: 'wooted this track',
           uid: e.user.id,
           un: e.user.username,
