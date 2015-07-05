@@ -15,7 +15,7 @@ define(function (require, exports, module) {
       userJoin: { type: 'boolean', label: 'User Join', default: true },
       friendJoin: { type: 'boolean', label: 'Friend Join', default: true },
       userLeave: { type: 'boolean', label: 'User Leave', default: true },
-      friendLeave: { type: 'boolean', label: 'Friend Join', default: true },
+      friendLeave: { type: 'boolean', label: 'Friend Leave', default: true },
       advance: { type: 'boolean', label: 'DJ Advance', default: true },
       grab: { type: 'boolean', label: 'Media Grab', default: true },
       meh: { type: 'boolean', label: 'Meh Vote', default: true },
@@ -97,7 +97,7 @@ define(function (require, exports, module) {
           badge: ':broken_heart:'
         })
       }
-      if (this.settings.get('userLeave')) {
+      else if (this.settings.get('userLeave')) {
         Events.trigger('chat:receive', {
           type: 'extplug-notification',
           classes: `${this._class()} extplug-user-leave`,
