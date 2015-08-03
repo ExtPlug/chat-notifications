@@ -26,40 +26,23 @@ define('extplug/chat-notifications/main',['require','exports','module','extplug/
       woot: { type: 'boolean', label: 'Woot Vote', 'default': false }
     },
 
-    init: function init(id, ext) {
-      this._super(id, ext);
-      this.onJoin = this.onJoin.bind(this);
-      this.onLeave = this.onLeave.bind(this);
-      this.onAdvance = this.onAdvance.bind(this);
-      this.onGrab = this.onGrab.bind(this);
-      this.onVote = this.onVote.bind(this);
+    style: {
+      '.cm.extplug-notification': { 'min-height': '46px' },
+      '.cm.extplug-user-join .msg': { 'color': '#2ecc40' },
+      '.cm.extplug-user-leave .msg': { 'color': '#ff851b' },
+      '.cm.extplug-advance .msg': { 'color': '#7fdbff' },
+      '.cm.extplug-grab .msg': { 'color': '#a670fe' },
+      '.cm.extplug-meh .msg': { 'color': '#ff4136' },
+      '.cm.extplug-woot .msg': { 'color': '#90ad2f' }
     },
 
     enable: function enable() {
       this._super();
-      API.on(API.USER_JOIN, this.onJoin);
-      API.on(API.BEFORE_USER_LEAVE, this.onLeave);
-      API.on(API.ADVANCE, this.onAdvance);
-      API.on(API.GRAB_UPDATE, this.onGrab);
-      API.on(API.VOTE_UPDATE, this.onVote);
-
-      this.Style({
-        '.cm.extplug-user-join .msg': { 'color': '#2ecc40' },
-        '.cm.extplug-user-leave .msg': { 'color': '#ff851b' },
-        '.cm.extplug-advance .msg': { 'color': '#7fdbff' },
-        '.cm.extplug-grab .msg': { 'color': '#a670fe' },
-        '.cm.extplug-meh .msg': { 'color': '#ff4136' },
-        '.cm.extplug-woot .msg': { 'color': '#90ad2f' }
-      });
-    },
-
-    disable: function disable() {
-      this._super();
-      API.off(API.USER_JOIN, this.onJoin);
-      API.off(API.BEFORE_USER_LEAVE, this.onLeave);
-      API.off(API.ADVANCE, this.onAdvance);
-      API.off(API.GRAB_UPDATE, this.onGrab);
-      API.off(API.VOTE_UPDATE, this.onVote);
+      this.listenTo(API, API.USER_JOIN, this.onJoin);
+      this.listenTo(API, API.BEFORE_USER_LEAVE, this.onLeave);
+      this.listenTo(API, API.ADVANCE, this.onAdvance);
+      this.listenTo(API, API.GRAB_UPDATE, this.onGrab);
+      this.listenTo(API, API.VOTE_UPDATE, this.onVote);
     },
 
     _class: function _class() {
