@@ -22,6 +22,16 @@ define(function (require, exports, module) {
       woot: { type: 'boolean', label: 'Woot Vote', default: false }
     },
 
+    style: {
+      '.cm.extplug-notification': { 'min-height': '46px' },
+      '.cm.extplug-user-join .msg':  { 'color': '#2ecc40' },
+      '.cm.extplug-user-leave .msg': { 'color': '#ff851b' },
+      '.cm.extplug-advance .msg':    { 'color': '#7fdbff' },
+      '.cm.extplug-grab .msg':       { 'color': '#a670fe' },
+      '.cm.extplug-meh .msg':        { 'color': '#ff4136' },
+      '.cm.extplug-woot .msg':       { 'color': '#90ad2f' }
+    },
+
     init(id, ext) {
       this._super(id, ext);
       this.onJoin = this.onJoin.bind(this);
@@ -38,15 +48,6 @@ define(function (require, exports, module) {
       API.on(API.ADVANCE, this.onAdvance);
       API.on(API.GRAB_UPDATE, this.onGrab);
       API.on(API.VOTE_UPDATE, this.onVote);
-
-      this.Style({
-        '.cm.extplug-user-join .msg':  { 'color': '#2ecc40' },
-        '.cm.extplug-user-leave .msg': { 'color': '#ff851b' },
-        '.cm.extplug-advance .msg':    { 'color': '#7fdbff' },
-        '.cm.extplug-grab .msg':       { 'color': '#a670fe' },
-        '.cm.extplug-meh .msg':        { 'color': '#ff4136' },
-        '.cm.extplug-woot .msg':       { 'color': '#90ad2f' }
-      });
     },
 
     disable() {
