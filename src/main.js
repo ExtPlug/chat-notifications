@@ -32,31 +32,13 @@ define(function (require, exports, module) {
       '.cm.extplug-woot .msg':       { 'color': '#90ad2f' }
     },
 
-    init(id, ext) {
-      this._super(id, ext);
-      this.onJoin = this.onJoin.bind(this);
-      this.onLeave = this.onLeave.bind(this);
-      this.onAdvance = this.onAdvance.bind(this);
-      this.onGrab = this.onGrab.bind(this);
-      this.onVote = this.onVote.bind(this);
-    },
-
     enable() {
       this._super();
-      API.on(API.USER_JOIN, this.onJoin);
-      API.on(API.BEFORE_USER_LEAVE, this.onLeave);
-      API.on(API.ADVANCE, this.onAdvance);
-      API.on(API.GRAB_UPDATE, this.onGrab);
-      API.on(API.VOTE_UPDATE, this.onVote);
-    },
-
-    disable() {
-      this._super();
-      API.off(API.USER_JOIN, this.onJoin);
-      API.off(API.BEFORE_USER_LEAVE, this.onLeave);
-      API.off(API.ADVANCE, this.onAdvance);
-      API.off(API.GRAB_UPDATE, this.onGrab);
-      API.off(API.VOTE_UPDATE, this.onVote);
+      this.listenTo(API, API.USER_JOIN, this.onJoin);
+      this.listenTo(API, API.BEFORE_USER_LEAVE, this.onLeave);
+      this.listenTo(API, API.ADVANCE, this.onAdvance);
+      this.listenTo(API, API.GRAB_UPDATE, this.onGrab);
+      this.listenTo(API, API.VOTE_UPDATE, this.onVote);
     },
 
     _class() {
