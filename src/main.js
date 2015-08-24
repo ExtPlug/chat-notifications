@@ -19,7 +19,14 @@ define(function (require, exports, module) {
       advance: { type: 'boolean', label: 'DJ Advance', default: true },
       grab: { type: 'boolean', label: 'Media Grab', default: true },
       meh: { type: 'boolean', label: 'Meh Vote', default: true },
-      woot: { type: 'boolean', label: 'Woot Vote', default: false }
+      woot: { type: 'boolean', label: 'Woot Vote', default: false },
+
+      showTitle: {
+        type: 'boolean',
+        label: 'Show song titles',
+        description: 'Display the title of the playing song in grab and vote notifications.',
+        default: true
+      }
     },
 
     style: {
@@ -44,6 +51,14 @@ define(function (require, exports, module) {
     _class() {
       let inline = this.settings.get('inline');
       return `${inline ? 'inline ' : ''}`;
+    },
+
+    _title() {
+      if (this.settings.get('showTitle')) {
+        let media = API.getMedia()
+        return `${media.author} – ${media.title}`
+      }
+      return 'this track'
     },
 
     onJoin(e) {
@@ -110,7 +125,7 @@ define(function (require, exports, module) {
         Events.trigger('chat:receive', {
           type: 'extplug-notification',
           classes: `${this._class()} extplug-grab`,
-          message: 'grabbed this track',
+          message: `grabbed ${this._title()}`,
           uid: e.user.id,
           un: e.user.username,
           badge: 'icon-grab'
@@ -123,7 +138,7 @@ define(function (require, exports, module) {
         Events.trigger('chat:receive', {
           type: 'extplug-notification',
           classes: `${this._class()} extplug-meh`,
-          message: 'meh\'d this track',
+          message: `meh'd ${this._title()}`,
           uid: e.user.id,
           un: e.user.username,
           badge: 'icon-meh'
@@ -133,7 +148,7 @@ define(function (require, exports, module) {
         Events.trigger('chat:receive', {
           type: 'extplug-notification',
           classes: `${this._class()} extplug-woot`,
-          message: 'wooted this track',
+          message: `wooted ${this._title()}`,
           uid: e.user.id,
           un: e.user.username,
           badge: 'icon-woot'
