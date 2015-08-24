@@ -46,8 +46,8 @@ gulp.task('rjs', [ 'babel' ], function (done) {
   })
 })
 
-gulp.task('build', function () {
-  return runseq('clean-lib', 'babel', 'rjs')
+gulp.task('build', function (cb) {
+  runseq('clean-lib', 'babel', 'rjs', cb)
 })
 
 gulp.task('default', [ 'build' ])
