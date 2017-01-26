@@ -2,9 +2,9 @@
 , "version": "1.1.2"
 , "description": "ExtPlug plugin that shows some useful notification messages in chat."
 , "devDependencies":
-  { "del": "^1.2.0"
+  { "del": "^2.2.2"
   , "gulp": "^3.8.11"
-  , "gulp-babel": "^5.1.0"
+  , "gulp-babel": "^6.1.2"
   , "mkdirp": "^0.5.1"
   , "requirejs": "^2.1.17"
   , "run-sequence": "^1.1.1" }
