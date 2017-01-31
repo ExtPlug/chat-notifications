@@ -1,13 +1,24 @@
-{ "name": "extplug-chat-notifications"
-, "version": "1.1.2"
-, "description": "ExtPlug plugin that shows some useful notification messages in chat."
-, "devDependencies":
-  { "del": "^1.2.0"
-  , "gulp": "^3.8.11"
-  , "gulp-babel": "^5.1.0"
-  , "mkdirp": "^0.5.1"
-  , "requirejs": "^2.1.17"
-  , "run-sequence": "^1.1.1" }
-, "scripts":
-  { "build": "gulp build"
-  , "test": "jshint src" } }
+{
+  "name": "extplug-chat-notifications",
+  "version": "1.1.2",
+  "license": "MIT",
+  "description": "ExtPlug plugin that shows some useful notification messages in chat.",
+  "author": "ReAnna <renee@kooi.me>",
+  "main": "build/chat-notifications.js",
+  "repository": "extplug/chat-notifications",
+  "keywords": [
+    "extplug-plugin",
+    "plug.dj"
+  ],
+  "files": [
+    "build",
+    "src"
+  ],
+  "devDependencies": {
+    "extplug-cli": "^1.0.0"
+  },
+  "scripts": {
+    "prepublish": "npm run build -- --minify",
+    "build": "extplug bundle src/main.js build/chat-notifications.js"
+  }
+}
