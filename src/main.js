@@ -11,7 +11,6 @@ define(function (require, exports, module) {
     description: 'Shows notification messages in chat for useful events',
 
     settings: {
-      inline: { type: 'boolean', label: 'Small Notifications', default: true },
       userJoin: { type: 'boolean', label: 'User Join', default: true },
       friendJoin: { type: 'boolean', label: 'Friend Join', default: true },
       userLeave: { type: 'boolean', label: 'User Leave', default: true },
@@ -21,6 +20,14 @@ define(function (require, exports, module) {
       meh: { type: 'boolean', label: 'Meh Vote', default: true },
       woot: { type: 'boolean', label: 'Woot Vote', default: false },
 
+      userJoinColor: { type: 'color', label: 'User Join Color', default: '#2ecc40' },
+      userLeaveColor: { type: 'color', label: 'User Leave Color', default: '#ff851b' },
+      advanceColor: { type: 'color', label: 'DJ Advance Color', default: '#7fdbff' },
+      grabColor: { type: 'color', label: 'Grab Color', default: '#a670fe' },
+      mehColor: { type: 'color', label: 'Meh Color', default: '#ff4136' },
+      wootColor: { type: 'color', label: 'Woot Color', default: '#90ad2f' },
+
+      inline: { type: 'boolean', label: 'Small Notifications', default: true },
       showTitle: {
         type: 'boolean',
         label: 'Show song titles',
@@ -46,6 +53,23 @@ define(function (require, exports, module) {
       this.listenTo(API, API.ADVANCE, this.onAdvance);
       this.listenTo(API, API.GRAB_UPDATE, this.onGrab);
       this.listenTo(API, API.VOTE_UPDATE, this.onVote);
+      this.settings.on('change:userJoinColor change:userLeaveColor change:advanceColor change:grabColor change:mehColor change:wootColor', this.updateStyles, this);
+      this.updateStyles();
+    },
+
+    updateStyles() {
+      this.removeStyles();
+      let color = name => {
+        return { 'color': this.settings.get(`${name}Color`) };
+      }
+      this.createStyle({
+        '.cm.extplug-user-join .msg':  color('userJoin'),
+        '.cm.extplug-user-leave .msg': color('userLeave'),
+        '.cm.extplug-advance .msg':    color('advance'),
+        '.cm.extplug-grab .msg':       color('grab'),
+        '.cm.extplug-meh .msg':        color('meh'),
+        '.cm.extplug-woot .msg':       color('woot')
+      });
     },
 
     _class() {
