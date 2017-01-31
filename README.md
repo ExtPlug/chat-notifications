@@ -5,7 +5,7 @@ ExtPlug plugin that shows additional notification messages in chat when users
 join or leave, grab, meh or woot a song, and when the next song starts.
 (Woot notifications are disabled by default.)
 
-![Chat Notifications](https://i.imgur.com/MEsolUY.png)
+![Chat Notifications](./screenshot.png)
 
 ## Installation
 
